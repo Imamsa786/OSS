@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KARE OSS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth;}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #fff;
+      background: linear-gradient(-45deg, #72221e, #982a2a, #eda76d, #b0214c);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 20px;
+      background-color: #6e3636;
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 2px solid #61dafb;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    .logos img {
+      width: 60px; height: 70px; border-radius: 10%;
+      margin-right: 10px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% {transform: translateY(0);}
+      50% {transform: translateY(-8px);}
+    }
+    .club-name { font-size: 1.5rem; font-weight: bold; color: #61dafb; }
+    .club-tagline { font-size: 0.9rem; color: #ddd; }
+
+    .nav-links {
+      display: flex; gap: 10px; list-style: none; align-items: center;
+    }
+    .nav-links li a {
+      text-decoration: none; color: #fff;
+      font-weight: 500; transition: color 0.3s;
+    }
+    .nav-links li a:hover { color: #61dafb; }
+    .menu-btn { display: none; cursor: pointer; color: #fff; font-size: 24px; }
+
+    .register-btn {
+      background: #61dafb; color: #000; font-weight: bold;
+      padding: 10px 10px; border-radius: 8px;
+      transition: 0.3s; text-decoration: none;
+    }
+    .register-btn:hover { background: #fff; color: #000; }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; flex-direction: column; background: rgba(0,0,0,0.9);
+        position: absolute; top: 70px; right: 20px;
+        padding: 10px 20px; border-radius: 20%;
+      }
+      .nav-links.show { display: flex; }
+      .menu-btn { display: block; }
+    }
+    .container {
+      max-width: 900px;
+      margin: 60px auto 35px;
+      background: rgba(0, 0, 0, 0.07);
+      border-radius: 18px;
+      padding: 45px 28px;
+      box-shadow: 0 6px 30px #bf9e9ec0;
+      text-align: center;
+    }
+    
+    ul {
+      text-align: left;
+      max-width: 650px;
+      margin: 32px auto;
+      padding-left: 0;
+  
+    }
+    ul li {
+      background: rgba(255,255,255,0.09);
+      
+      padding: 10px 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(130,23,23,0.12);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-weight: 500;
+    }
+    ul li i {
+      font-size: 1.4em;
+      color: #ffcc00;
+    }
+
+    .container, .about-section, .events-section{
+      max-width: 1000px; margin: 40px auto; padding: 20px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      text-align: center;
+      border: 2px solid #000000;
+    }
+    .about-section {
+      text-align: justify;
+      line-height: 1.6;
+      color: #f0f0f0;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #61dafb;
+    }
+    .reg { text-align: center; margin: 20px; }
+    h1, h2 { color: #61dafb; margin-bottom: 20px; text-align: center; }
+    h2 { color: #b6a03f; margin-bottom: 20px; text-align: center; }
+    p { line-height: 1.6; margin-bottom: 10px; }
+
+    
+    .hero-btn {
+      display: inline;
+      background: #3bffa3; color: #000;
+      font-size: 1.2rem; font-weight: bold;
+      padding: 12px 24px; border-radius: 25px;
+      text-decoration: none; transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(59, 255, 163, 0.4);
+      margin: 20px auto;
+    }
+    .hero-btn:hover {
+      background: #d19f9f; color: #000;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(209, 159, 159, 0.6);
+    }
+
+    .Contact a { font-size: 24px; margin: 0 10px; transition: transform 0.3s; }
+    .Contact a:hover { transform: scale(1.2); }
+
+    footer {
+      background: #222;
+      color: #bbb;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      border-top: 2px solid #61dafb;
+    }
+    footer p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #ffffff;
+      margin: 0 8px;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #557983;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logos">
+      <img src="https://www.bing.com/th/id/OIP.dH9xGc9McUDoY0WGzYGl5gHaHa?w=160&h=211" alt="Logo 1">
+      <img src="https://d1fdloi71mui9q.cloudfront.net/r5TKb0TBT0ap4qkEvU5T_xqs3cm6YoU46N7IY" alt="Logo 2">
+    </div>
+    <div>
+      <h1 class="club-name">KARE OPEN SOURCE SOCIETY</h1>
+      <h2 class="club-tagline"><strong>Debug Engineers Liberally</strong></h2>
+    </div>
+    <i class="fa-solid fa-bars menu-btn"></i>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+<div class="container fade-up" id="home"class="container" id="home" style=" text-align: center; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff; border-radius: 12px;  max-width: 1000px;">
+  <h1 style="font-size: 3rem; margin-bottom: 20px; color: #ffffff;">
+    Welcome to KARE OSS</span>
+  </h1>
+  <p style="font-size: 1.3rem; line-height: 1.5; margin-bottom: 20px;">
+    Your <span>gateway</span> to <strong>open-source collaboration</strong> 
+    and <span>innovation</span>.  
+    Explore, learn, and contribute to meaningful projects that shape the future of technology.
+  </p>
+  <h4>Registration for <strong>Software Freedom Festival 3.0 - Grand Finale</strong> is now open!</h4>
+  <div class="reg">
+        <a href="https://vintra.kalasalingam.ac.in/" class="hero-btn"><i class="fa-solid fa-user-plus"></i> Register Now</a>
+  </div><br>
+  <div class="reg">
+    <a href="https://chat.whatsapp.com/JOk6JwkslvC6lI4d4ZuZmd?mode=ems_copy_t" class="hero-btn"><i class="fa-brands fa-whatsapp"></i> Join Here </a>
+  </div>
+</div>
+  <section  id="about" class="fade-up" id="about" style="padding: 60px 20px; background: linear-gradient(135deg, #141e30, #243b55); color: #fff; border-radius: 12px; margin: 40px auto; max-width: 1000px; text-align: center;">
+  <h2 style="font-size: 2.5rem; margin-bottom: 20px; color:#00e6e6;">
+    About Us
+  </h2>
+  <hr style="border: 1px solid #00e6e6; width: 80px; margin: 10px auto;">
+  <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; justify-content: justify;">
+    <strong>KARE OSS</strong> is a dedicated platform for students and professionals passionate about technology and innovation. 
+    Our community organizes diverse events like <span>Hackathons</span>, 
+    <span >Tech Talks</span> and 
+    <span >Workshops</span> to provide valuable opportunities for <strong>learning</strong>, 
+    <strong>collaboration</strong>, and <strong>skill development</strong>.
+  </p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: left;">
+
+    <div style="background: rgba(255,255,255,0.08); padding: 20px; border-radius: 10px; transition: transform 0.3s;">
+      <i class="fa-solid fa-lightbulb" style="font-size: 2rem; color:#ffcc00;"></i>
+      <h3 style="margin: 10px 0; color:#ffcc00;">Innovation</h3>
+      <p style="line-height: 1.6; font-size: 1rem;">
+        We encourage creativity and innovative thinking to solve real-world challenges.
+      </p>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.08); padding: 20px; border-radius: 10px; transition: transform 0.3s;">
+      <i class="fa-solid fa-users" style="font-size: 2rem; color:#1dd1a1;"></i>
+      <h3 style="margin: 10px 0; color:#1dd1a1;">Community</h3>
+      <p style="line-height: 1.6; font-size: 1rem;">
+        A collaborative environment where like-minded individuals connect and grow together.
+      </p>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.08); padding: 20px; border-radius: 10px; transition: transform 0.3s;">
+      <i class="fa-solid fa-chart-line" style="font-size: 2rem; color:#00ff99;"></i>
+      <h3 style="margin: 10px 0; color:#00ff99;">Growth</h3>
+      <p style="line-height: 1.6; font-size: 1rem;">
+        Empowering members to improve technical skills, explore trends, and become industry-ready.
+      </p>
+    </div>
+  </div>
+
+  <p style="font-size: 1.1rem; margin-top: 40px; line-height: 1.8;">
+    Join us and be part of a vibrant community committed to exploring technology, 
+    contributing to open-source, and making a positive impact. Together, we can 
+    <span>create</span>, <span>innovate</span>, and 
+    <span>inspire!</span>
+  </p>
+</section>
+
+  <div class="container" id="events">
+    <h1>KARE Open Source Society</h1>
+    <h2>Events <hr><hr></h2>
+    <ul>
+      <section id="sff" class="fade-up" id="sff" style="padding: 60px 20px; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff; text-align: center; border-radius: 12px; margin: 40px auto; max-width: 900px;">
+  <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #00e6e6;">
+    Software Freedom Festival <hr style="border: 1px solid #00e6e6; width: 80px; margin: 10px auto;">
+  </h2>
+  <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.6;">
+    <strong>Software Freedom Festival</strong> is an event that showcases ideas and innovations 
+    based on solving <span>real-world problems</span>. It brings together 
+    creative thinkers, developers, and innovators to pitch, design, and build impactful solutions.
+  </p>
+  <div style="display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 700px; margin: 0 auto;">
+  
+    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; transition: transform 0.3s;">
+      <h3 style="color:#e06969; margin-bottom: 10px;"><i class="fa-solid fa-lightbulb"></i>Round 1: Idea Pitch</h3><hr style="border: 1px solid #000000; width: 200px; margin: 10px auto;">
+      <p style="font-size: 1rem; line-height: 1.5;">
+        Participants present their innovative ideas to tackle real-world challenges. 
+        This round focuses on creativity, clarity, and potential impact.
+      </p>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; transition: transform 0.3s;">
+      <h3 style="color:#b29595; margin-bottom: 10px;"><i class="fa-solid fa-cubes"></i> Round 2: Model Craft</h3><hr style="border: 1px solid #000000; width: 230px; margin: 10px auto;">
+      <p style="font-size: 1rem; line-height: 1.5;">
+        Teams transform their ideas into models or prototypes, completing <strong>at least 50%</strong> of their project. 
+        Focus is on technical execution and design.
+      </p>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; transition: transform 0.3s; ">
+      <h3 style="color:#74c4b4; margin-bottom: 10px;"><i class="fa-solid fa-rocket"></i>Round 3: The Final Round</h3><hr style="border: 1px solid #000000; width: 250px; margin: 10px auto;">
+      <p style="font-size: 1rem; line-height: 1.5;">
+        The complete project (<strong>100%</strong>) is presented with live demonstrations, 
+        showcasing functionality and the final output to judges and audience.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="hackathon" class="fade-up" id="hackathon" style="padding: 60px 20px;background: linear-gradient(135deg, #134E5E, #71B280); color: #fff; text-align: center; border-radius: 12px; margin: 40px auto; max-width: 900px;">
+  <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #00e6e6;">
+    Hackathon<hr style="border: 1px solid #00e6e6; width: 80px; margin: 10px auto;">
+  </h2>
+  <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.6;">
+    <strong> Hackathon: </strong> A thrilling <span>24-hour coding Hackathon</span> 
+    where teams compete to design and build innovative solutions for <span>real-world problems</span>.
+  </p>
+
+  <div style="display: flex; justify-content: center;">
+    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; max-width: 600px; transition: transform 0.3s;">
+      <h3 style="color:#ffffff; margin-bottom: 10px;">Event Highlights</h3>
+      <p style="font-size: 1rem; line-height: 1.5;">
+        ⏳ 24 Hours of Non-stop Coding <br>
+        👥 Team Collaboration & Problem Solving <br>
+        💡 Real-world Innovation Challenges <br>
+        🏆 Prizes & Recognition for the Best Solutions
+      </p>
+    </div>
+  </div>
+</section>
+
+    <section  id="workshop" class="fade-up" id="workshop" style="padding: 50px 20px; background: linear-gradient(135deg, #64bbd3, #71B280); color: #fff; text-align: center; border-radius: 12px; margin: 40px auto; max-width: 900px;">
+  <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #00e6e6;">
+    Workshop<hr style="border: 1px solid #00e6e6; width: 80px; margin: 10px auto;">
+  </h2>
+  <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.6;">
+    <strong> Workshop: </strong> Hands-on sessions designed to help participants 
+    <span>learn and practice</span> how to effectively 
+    contribute to <span>open-source projects</span>.
+  </p>
+
+  <div style="display: flex; justify-content: center;">
+    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; max-width: 600px; transition: transform 0.3s;">
+      <h3 style="color:#ffffff; margin-bottom: 10px;">Event Highlights</h3>
+      <p style="font-size: 1rem; line-height: 1.5; justify-content: right;">
+        🛠️ Practical Coding Exercises <br>
+        🌐 Open-Source Contribution Guidelines <br>
+        💻 Version Control (Git &amp; GitHub) Training <br>
+        🚀 Build Confidence to Collaborate Globally
+      </p>
+    </div>
+  </div>
+</section>
+</section>
+
+  </div>
+  
+
+<footer>
+  <div class="Contact" id="contact">
+    <h2>Contact Us<hr><hr></h2>
+    <p><strong>Email: </strong><i class="fa-solid fa-envelope"></i><a href="mailto:kareoss@klu.ac.in">kareoss@klu.ac.in</a></p>
+    <p><strong>Charter Official: </strong><a href="https://www.linkedin.com/in/r-raja-subramanian-a0076ab6/">Dr.R.Raja Subramanian</a>(Associate HoD/CSE & Associate Professor)</p>
+    <p><strong>Connect with us on Social media:</strong>
+      
+      <a href="https://www.linkedin.com/in/kare-oss"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/kare_oss/"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://chat.whatsapp.com/GPASHhONbjlIvIw2Km4DYo"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://x.com/OssKare"><i class="fa-brands fa-x-twitter"></i></a>
+    </p>
+  </div><br><br>
+
+    <p>&copy; Copyright 2025 KARE Open Source Society | Created by KARE OSS</p>
+  </footer>
+
+  <script>
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+      });
+    });
+
+  const faders = document.querySelectorAll(".fade-up");
+  const appearOptions = {
+    threshold: 0.2, 
+  };
+
+  const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    });
+  }, appearOptions);
+  faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+  });
+</script>
+</body>
+</html>
